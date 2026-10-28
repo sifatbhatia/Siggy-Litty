@@ -1,4 +1,4 @@
-# Email Signature Studio
+# Signet
 
 A compatibility-aware email signature generator built with TypeScript, React, and Vite.
 
@@ -11,7 +11,7 @@ It collects one profile, then generates:
 - plain-text fallback
 
 It also ships with:
-- 4 themes/templates
+- 5 themes/templates (including Bare Transparent)
 - a client compatibility matrix
 - per-client install instructions
 - output validation tests for strict variants
@@ -25,7 +25,8 @@ So this project chooses **progressive enhancement over cleverness**.
 ## Quick start
 
 ```bash
-cd /home/lume/.openclaw/workspace/email-signature-studio
+git clone https://github.com/sifatbhatia/Signet.git
+cd Signet
 npm install
 npm run dev
 ```
@@ -44,6 +45,29 @@ npm run build
 npm run preview
 ```
 
+## Editor-first interface
+
+- Profile, Contact, Links, and Style panels keep the editing loop compact. On mobile, use **Edit details / Preview & export** to move between panes.
+- Five original signature themes and all six original export formats are preserved. The generator and its constraints are unchanged.
+- The approved, locally hosted Siftion UI font is used only in app chrome. Email HTML keeps its original system-font stacks and table layout. Font licensing is included in `public/fonts/OFL.txt`.
+- The live preview is a script-free sandboxed iframe; app CSS and appearance do not recolor or restyle the export. It is a browser depiction, not a Gmail/Outlook simulation.
+- **Copy signature** writes rich HTML and a readable plain-text fallback. If rich copying is unsupported, it tries plain text. If clipboard access is denied, selected manual-copy text and HTML download remain available.
+- **Download HTML/text** exports the selected format. **Download bundle** contains your profile, theme, all six outputs, warnings, and checks as JSON. Bundle import is not implemented.
+- Profile data stays in React memory and is lost on reload. Only your app appearance choice is stored locally. Hosted avatar/logo URLs are fetched by the browser when previewing.
+- Link exports use the first four complete links, as before; the bundle retains the full list.
+
+## Browser verification
+
+```sh
+# Requires uv and an installed Microsoft Edge; override EDGE in the script for another executable.
+uv run --with playwright python scripts/check-redesign.py http://127.0.0.1:4188
+# After npm run build and npm run preview -- --host 127.0.0.1 --port 4189 --strictPort:
+uv run --with playwright python scripts/check-redesign.py http://127.0.0.1:4189
+npm exec -- vite-node scripts/check-export-preservation.ts --verify
+```
+
+The browser suite exercises all fields, links, five themes, six outputs, downloads, actual clipboard readback, denied-copy fallback, keyboard navigation, independent appearance, and 320–1440px responsive layouts. Reports and screenshots are saved under `verification/redesign/` or `verification/production/`. It checks original exports against `verification/original-exports.json`; do not overwrite that baseline to make a changed output pass.
+
 ## Architecture
 
 ```text
@@ -52,7 +76,7 @@ src/
   data/
     compatibility.ts       researched client matrix + install steps + sources
     defaults.ts            example starter profile
-    themes.ts              4 templates/themes
+    themes.ts              5 templates/themes
     variants.ts            variant rules and normalization constraints
   lib/
     generator.ts           normalization + HTML/text generation
@@ -93,6 +117,7 @@ The generator intentionally degrades features per target:
 2. **Linen Note** – warmer personal/consulting tone
 3. **Cobalt Ribbon** – bolder agency/startup tone
 4. **Noir Mono** – stripped-back minimal option
+5. **Bare Transparent** – no background fill; inherits the compose surface
 
 ## Export/install workflow
 
@@ -118,21 +143,8 @@ Each output panel provides:
 - Web-font and SVG support in signatures is intentionally conservative because the recipient client still decides final rendering.
 - Remote-image blocking/privacy proxies can break avatar/logo visibility.
 
-## Research docs
+## Docs
 
+- [`DESIGN.md`](./DESIGN.md)
 - [`RESEARCH.md`](./RESEARCH.md)
 - [`COMPATIBILITY.md`](./COMPATIBILITY.md)
-
-## Practical audit notes (Mar 2026)
-
-A small quality pass focused on highest-impact issues rather than a broad redesign.
-
-What changed:
-- Fixed the output summary bug where the universal-safe HTML variant could show plain-text/dark-mode fallback messaging instead of real cross-client guidance.
-- Added better accessibility semantics for output tabs and theme selection (`tabpanel`, keyboard arrow navigation, radio-style theme state).
-- Improved compatibility table accessibility with a caption and explicit column scopes.
-- Added clearer clipboard failure feedback so unsupported browsers do not fail silently.
-
-Still intentionally true:
-- Preview remains advisory, not authoritative — final validation should happen in actual sent emails.
-- The app stays conservative about dark mode and remote images because recipient clients still control the last mile.

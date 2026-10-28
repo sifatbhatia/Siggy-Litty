@@ -56,7 +56,7 @@ export const themes: Theme[] = [
   {
     id: 'bare',
     name: 'Bare Transparent',
-    description: 'No fill background — clean transparent signature block for email clients that already style the compose area.',
+    description: 'No fill background, a clean transparent signature block for email clients that already style the compose area.',
     fontStack: "'Segoe UI', Helvetica, Arial, sans-serif",
     accent: '#2053ff',
     accentSoft: 'transparent',

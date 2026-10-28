@@ -1,7 +1,9 @@
 {
-  "name": "email-signature-studio",
+  "name": "signet",
   "private": true,
   "version": "0.1.0",
+  "description": "A considered email signature. One profile, five themes, six export formats.",
+  "author": "Sifat Bhatia",
   "type": "module",
   "scripts": {
     "dev": "vite",

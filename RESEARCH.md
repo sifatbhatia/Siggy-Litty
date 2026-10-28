@@ -15,31 +15,31 @@ That means “works in the signature box” does **not** mean “works when rece
 ### 1) HTML/CSS support
 
 - **Gmail** supports formatted signatures and images, but its signature tool is constrained and signatures are capped at **10,000 characters** including images. It is not a safe place to rely on complex pasted HTML or heavyweight markup.
-  - Source: Gmail Help — Create a Gmail signature  
+  - Source: Gmail Help: Create a Gmail signature
     https://support.google.com/mail/answer/8395?hl=en
 
 - **Spark Classic** explicitly supports pasted HTML signatures via an `HTML` mode and lets users add images, making it unusually friendly as a signature editor.
-  - Source: Spark Help Center — Manage email signatures  
+  - Source: Spark Help Center: Manage email signatures
     https://support.readdle.com/spark/sending-emails/manage-email-signatures
 
 - **Outlook** supports text, links, and pictures in signatures, but classic desktop Outlook is still the riskiest renderer because downstream HTML rendering is heavily constrained.
-  - Source: Microsoft Support — How to add and change an email signature in Outlook  
+  - Source: Microsoft Support: How to add and change an email signature in Outlook
     https://support.microsoft.com/en-us/office/how-to-add-and-change-an-email-signature-in-outlook-8ee5d4f4-68fd-464a-a1c1-0e1c80bb27f2
 
 - **Thunderbird** supports HTML signatures directly or via attached signature files, including image placement.
-  - Source: Thunderbird Help — Signatures  
+  - Source: Thunderbird Help: Signatures
     https://support.mozilla.org/en-US/kb/signatures
 
 - **Apple Mail** supports rich signatures and is one of the more capable renderers among mainstream desktop clients.
-  - Source: Apple Support — Create and use email signatures in Mail on Mac  
+  - Source: Apple Support: Create and use email signatures in Mail on Mac
     https://support.apple.com/guide/mail/create-and-use-email-signatures-mail11943/mac
 
 - **Proton Mail** allows per-address signature configuration and explicitly suggests third-party signature builders.
-  - Source: Proton Support — Display name and email signature  
+  - Source: Proton Support: Display name and email signature
     https://proton.me/support/display-name-email-signature
 
 - **Yahoo Mail** exposes a simpler signature editor and should be treated as a conservative webmail target.
-  - Source: Yahoo Help — Add, edit, or disable your signature in Yahoo Mail  
+  - Source: Yahoo Help: Add, edit, or disable your signature in Yahoo Mail
     https://help.yahoo.com/kb/SLN28060.html
 
 ### 2) `<style>` blocks and media queries
@@ -48,9 +48,9 @@ That means “works in the signature box” does **not** mean “works when rece
 - For signature generation, this matters even more because many editors store only HTML fragments, not full document structure.
 
 Sources:
-- Can I Email — `<style>` element  
+- Can I Email: `<style>` element
   https://www.caniemail.com/features/html-style/
-- Can I Email — `@media`  
+- Can I Email: `@media`
   https://www.caniemail.com/features/css-at-media/
 
 **Rule adopted:** only the Apple Mail-safe variant may depend on a small `<style>` block, and even there the layout still works without it.
@@ -65,7 +65,7 @@ Litmus’s dark mode guidance remains the most useful practical summary: there i
 Litmus also notes that **Gmail and Outlook are especially difficult to target precisely**, which is why neutral-safe palettes are more reliable than aggressive light/dark assumptions.
 
 Source:
-- Litmus — The Developer’s Technical Guide to Coding Dark Mode Emails  
+- Litmus: The Developer’s Technical Guide to Coding Dark Mode Emails
   https://www.litmus.com/blog/coding-emails-for-dark-mode
 
 **Rule adopted:**
@@ -79,7 +79,7 @@ Source:
 Caniemail’s `@font-face` data remains too inconsistent to treat web fonts as signature-safe across the target matrix.
 
 Source:
-- Can I Email — `@font-face`  
+- Can I Email: `@font-face`
   https://www.caniemail.com/features/css-at-font-face/
 
 **Rule adopted:** web fonts are disabled except for the Apple Mail-safe variant, which still includes strong system fallbacks.
@@ -89,7 +89,7 @@ Source:
 SVG remains risky for broad signature use. Even where a client or editor tolerates SVG, the recipient client may not.
 
 Source:
-- Can I Email — SVG image format  
+- Can I Email: SVG image format
   https://www.caniemail.com/features/image-svg/
 
 **Rule adopted:** PNG-first. SVG only allowed in the Apple Mail-safe variant, and even then the app warns users to keep a PNG fallback available.
@@ -101,11 +101,11 @@ Source:
 - **Spark** supports adding images but notes direct inserted images are not resizable, so pre-sized assets or pasted HTML are safer.
 
 Sources:
-- Proton Support — Display name and email signature  
+- Proton Support: Display name and email signature
   https://proton.me/support/display-name-email-signature
-- Thunderbird Help — Signatures  
+- Thunderbird Help: Signatures
   https://support.mozilla.org/en-US/kb/signatures
-- Spark Help Center — Manage email signatures  
+- Spark Help Center: Manage email signatures
   https://support.readdle.com/spark/sending-emails/manage-email-signatures
 
 **Rule adopted:**
@@ -115,7 +115,7 @@ Sources:
 
 ### 7) Animated GIFs
 
-Animated GIF behavior is still inconsistent—especially in Outlook desktop, where the first frame may be all the user sees.
+Animated GIF behavior is still inconsistent, especially in Outlook desktop, where the first frame may be all the user sees.
 
 Practical implication: animated GIFs are not a good default for professional signatures.
 
@@ -164,27 +164,27 @@ So the generator favors:
 
 ## Source list
 
-1. Gmail Help — Create a Gmail signature  
+1. Gmail Help: Create a Gmail signature
    https://support.google.com/mail/answer/8395?hl=en
-2. Spark Help Center — Manage email signatures  
+2. Spark Help Center: Manage email signatures
    https://support.readdle.com/spark/sending-emails/manage-email-signatures
-3. Apple Support — Create and use email signatures in Mail on Mac  
+3. Apple Support: Create and use email signatures in Mail on Mac
    https://support.apple.com/guide/mail/create-and-use-email-signatures-mail11943/mac
-4. Microsoft Support — How to add and change an email signature in Outlook  
+4. Microsoft Support: How to add and change an email signature in Outlook
    https://support.microsoft.com/en-us/office/how-to-add-and-change-an-email-signature-in-outlook-8ee5d4f4-68fd-464a-a1c1-0e1c80bb27f2
-5. Yahoo Help — Add, edit, or disable your signature in Yahoo Mail  
+5. Yahoo Help: Add, edit, or disable your signature in Yahoo Mail
    https://help.yahoo.com/kb/SLN28060.html
-6. Proton Support — Display name and email signature  
+6. Proton Support: Display name and email signature
    https://proton.me/support/display-name-email-signature
-7. Thunderbird Help — Signatures  
+7. Thunderbird Help: Signatures
    https://support.mozilla.org/en-US/kb/signatures
-8. Can I Email — `<style>` element  
+8. Can I Email: `<style>` element
    https://www.caniemail.com/features/html-style/
-9. Can I Email — `@media`  
+9. Can I Email: `@media`
    https://www.caniemail.com/features/css-at-media/
-10. Can I Email — `@font-face`  
+10. Can I Email: `@font-face`
     https://www.caniemail.com/features/css-at-font-face/
-11. Can I Email — SVG image format  
+11. Can I Email: SVG image format
     https://www.caniemail.com/features/image-svg/
-12. Litmus — The Developer’s Technical Guide to Coding Dark Mode Emails  
+12. Litmus: The Developer’s Technical Guide to Coding Dark Mode Emails
     https://www.litmus.com/blog/coding-emails-for-dark-mode
